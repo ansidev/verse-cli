@@ -121,18 +121,26 @@ func VerseCommandHandler(ctx *cli.Context) error {
 
 	c.Wait()
 	utils.CreateDirIfNotExists(BaseDir)
+
 	filePath := bible.GetFilePath(BaseDir, BibleVersionCode, chapterNumber, verseNumber)
 	fmt.Fprintf(writer, "Truncating file %s\n", filePath)
-	utils.TruncateFile(filePath)
+	err := utils.TruncateFile(filePath)
+	if err != nil {
+		return err
+	}
+
 	for _, bookCode := range append(bible.OldStatementBookCodes, bible.NewStatementBookCodes...) {
 		if !bible.IsValidVerseAddress(bookCode, chapterNumber, verseNumber) {
 			continue
 		}
 
 		url := fmt.Sprintf("%s/%d/%s.%d.%d", BaseURL, BibleVersionId, bookCode, chapterNumber, verseNumber)
-		c.Visit(url)
-		totalJobs++
+		err1 := c.Visit(url)
+		if err1 != nil {
+			return err1
+		}
 
+		totalJobs++
 		verseAddr := fmt.Sprintf("%s.%d.%d", bookCode, chapterNumber, verseNumber)
 		jobMap.Store(verseAddr, totalJobs)
 	}
