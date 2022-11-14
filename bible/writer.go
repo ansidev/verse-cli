@@ -28,7 +28,7 @@ func WriteVerseToFile(baseDir string, bibleVersionCode string, chapterNumber int
 
 	defer f.Close()
 	formattedVerse := strings.ReplaceAll(verse, "\n", "\n>\n> ")
-	content := fmt.Sprintf("\n> %s\n>\n> **%s**\n", formattedVerse, verseAddr)
+	content := fmt.Sprintf("\n> %s\n>\n> (**%s**)\n", formattedVerse, verseAddr)
 	if _, err := f.WriteString(content); err != nil {
 		log.Println(err)
 	}
