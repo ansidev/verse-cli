@@ -126,7 +126,7 @@ func VerseCommandHandler(ctx *cli.Context) error {
 	fmt.Fprintf(writer, "Truncating file %s\n", filePath)
 	err := utils.TruncateFile(filePath)
 	if err != nil {
-		return err
+		fmt.Fprint(writer, err.Error())
 	}
 
 	for _, bookCode := range append(bible.OldStatementBookCodes, bible.NewStatementBookCodes...) {
