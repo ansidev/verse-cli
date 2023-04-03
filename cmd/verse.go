@@ -80,9 +80,9 @@ func VerseCommandHandler(ctx *cli.Context) error {
 		messages.Store(jobNumber, fmt.Sprintf("Job #%02d: Fetching verse %s\n", jobNumber, verseAddr))
 	})
 
-	c.OnHTML("body > div.body > div > div > div > div:nth-child(1)", func(e *colly.HTMLElement) {
-		verse := e.ChildText("div.lh-copy")
-		verseAddr := e.ChildText("h1")
+	c.OnHTML("#__next > div > main > div > div > div > div:nth-child(1)", func(e *colly.HTMLElement) {
+		verse := e.ChildText("p")
+		verseAddr := e.ChildText("h2")
 
 		jobNumber := e.Request.Ctx.GetAny(CtxKeyJobNumber).(int)
 		if len(verse) == 0 || len(verseAddr) == 0 {
