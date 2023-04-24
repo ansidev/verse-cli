@@ -80,7 +80,7 @@ func VerseCommandHandler(ctx *cli.Context) error {
 		messages.Store(jobNumber, fmt.Sprintf("Job #%02d: Fetching verse %s\n", jobNumber, verseAddr))
 	})
 
-	c.OnHTML("#__next > div > main > div > div > div > div:nth-child(1)", func(e *colly.HTMLElement) {
+	c.OnHTML("#__next > div > main > div > div > div.grid > div.max-w-full > div:nth-child(1)", func(e *colly.HTMLElement) {
 		verse := e.ChildText("p")
 		verseAddr := e.ChildText("h2")
 
