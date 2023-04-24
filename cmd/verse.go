@@ -24,24 +24,14 @@ const (
 )
 
 func VerseCommandHandler(ctx *cli.Context) error {
-	month := ctx.Int("month")
-	day := ctx.Int("day")
-	addrFormat := ctx.String("format")
+	chapterNumber, verseNumber, resultCode := utils.ParseInputArguments(ctx)
 
-	resultCode := utils.ValidateMonthAndDay(month, day)
-
-	if resultCode == utils.InvalidMonth {
-		return fmt.Errorf("invalid month: %d", month)
+	if resultCode == utils.InvalidChapterNumber {
+		return fmt.Errorf("invalid chapter number: %d", chapterNumber)
 	}
 
-	if resultCode == utils.InvalidDay {
-		return fmt.Errorf("invalid day: %d", day)
-	}
-
-	chapterNumber, verseNumber := day, month
-	if addrFormat == AddrFormatMonthDay {
-		chapterNumber = month
-		verseNumber = day
+	if resultCode == utils.InvalidVerseNumber {
+		return fmt.Errorf("invalid verse number: %d", verseNumber)
 	}
 
 	done := make(chan bool, 1)
