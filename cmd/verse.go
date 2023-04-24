@@ -6,6 +6,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/ansidev/golibs/io"
 	"github.com/ansidev/verse-cli/bible"
 	"github.com/ansidev/verse-cli/utils"
 	"github.com/gocolly/colly/v2"
@@ -110,11 +111,14 @@ func VerseCommandHandler(ctx *cli.Context) error {
 	}()
 
 	c.Wait()
-	utils.CreateDirIfNotExists(BaseDir)
+	err := io.CreateDirIfNotExists(BaseDir)
+	if err != nil {
+		fmt.Fprint(writer, err.Error())
+	}
 
 	filePath := bible.GetFilePath(BaseDir, BibleVersionCode, chapterNumber, verseNumber)
 	fmt.Fprintf(writer, "Truncating file %s\n", filePath)
-	err := utils.TruncateFile(filePath)
+	err = io.TruncateFile(filePath)
 	if err != nil {
 		fmt.Fprint(writer, err.Error())
 	}
