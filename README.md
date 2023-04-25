@@ -15,16 +15,15 @@ NAME:
    verse - Verse CLI
 
 USAGE:
-   Get verses by month and day. Example command: verse --month=12 --day=12 --format=md
+   Get verses by chapter and verse number. Example command: verse -c=1 -v=2
 
 COMMANDS:
    help, h  Shows a list of commands or help for one command
 
 GLOBAL OPTIONS:
-   --month value, -m value   Month to fetch verse for. Value range: [1-12] (default: current local month)
-   --day value, -d value     Day to fetch verse for. Value range: [1-31] (default: current local day)
-   --format value, -f value  Verse address format. dm: {book} {month}:{day}, md: {book} {day}:{month}. (default: "dm")
-   --help, -h                show help (default: false)
+   --chapter value, -c value  Chapter number. Value range: [1-150]. (default: 4)
+   --verse value, -v value    Verse number. Value range: [1-176]. (default: 25)
+   --help, -h                 show help
 ```
 
 ## Contact
