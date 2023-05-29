@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"strings"
 	"sync"
 	"time"
@@ -72,8 +73,12 @@ func VerseCommandHandler(ctx *cli.Context) error {
 	})
 
 	c.OnHTML("#__next > div > main > div > div > div.grid > div.max-w-full > div:nth-child(1)", func(e *colly.HTMLElement) {
-		verse := e.ChildText("p")
 		verseAddr := e.ChildText("h2")
+		pChildTexts := e.ChildTexts("p")
+		if len(pChildTexts) == 0 {
+			log.Fatalf("no verse found for %s\n", verseAddr)
+		}
+		verse := pChildTexts[0]
 
 		jobNumber := e.Request.Ctx.GetAny(CtxKeyJobNumber).(int)
 		if len(verse) == 0 || len(verseAddr) == 0 {
