@@ -3,14 +3,12 @@ package main
 import (
 	"log"
 	"os"
-	"time"
 
 	"github.com/ansidev/verse-cli/cmd"
 	"github.com/urfave/cli/v2"
 )
 
 func main() {
-	now := time.Now().Local()
 	app := &cli.App{
 		Name:      "verse",
 		Usage:     "Verse CLI",
@@ -19,13 +17,13 @@ func main() {
 			&cli.IntFlag{
 				Name:    "chapter",
 				Aliases: []string{"c"},
-				Value:   int(now.Month()),
+				Value:   1,
 				Usage:   "Chapter number. Value range: [1-150].",
 			},
 			&cli.IntFlag{
 				Name:    "verse",
 				Aliases: []string{"v"},
-				Value:   int(now.Day()),
+				Value:   1,
 				Usage:   "Verse number. Value range: [1-176].",
 			},
 		},
