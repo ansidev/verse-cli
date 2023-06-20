@@ -28,3 +28,4 @@ jobs:
         uses: ghacts/go@main
         with:
           go-version: ${{ matrix.go-version }}
+          artifact-name: "verse-${{ matrix.os }}-go-${{ matrix.go-version }}"
