@@ -1,12 +1,12 @@
 module github.com/ansidev/verse-cli
 
-go 1.19
+go 1.20
 
 require (
 	github.com/ansidev/golibs v0.0.0-20230131145629-863b45e7da89
 	github.com/gocolly/colly/v2 v2.1.0
 	github.com/gosuri/uilive v0.0.4
-	github.com/urfave/cli/v2 v2.25.4
+	github.com/urfave/cli/v2 v2.25.7
 )
 
 require (
