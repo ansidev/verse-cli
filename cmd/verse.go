@@ -72,7 +72,7 @@ func VerseCommandHandler(ctx *cli.Context) error {
 		messages.Store(jobNumber, fmt.Sprintf("Job #%02d: Fetching verse %s\n", jobNumber, verseAddr))
 	})
 
-	c.OnHTML("#__next > div > main > div > div > div.grid > div.max-w-full > div:nth-child(1)", func(e *colly.HTMLElement) {
+	c.OnHTML("#__next > div > div > main > div > div > div.grid > div.max-w-full > div:nth-child(1)", func(e *colly.HTMLElement) {
 		verseAddr := e.ChildText("h2")
 		pChildTexts := e.ChildTexts("p")
 		if len(pChildTexts) == 0 {
